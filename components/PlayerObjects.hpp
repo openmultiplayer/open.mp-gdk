@@ -123,14 +123,14 @@ namespace ompgdk
 		data.targetRot = { rotX, rotY, rotZ };
 		data.speed = speed;
 
-		object->startMoving(data);
+		object->move(data);
 		return true;
 	}
 
 	inline bool StopPlayerObject(int playerid, int objectid)
 	{
 		GET_PLAYER_OBJECT_CHECKED(object, playerid, objectid, false);
-		object->stopMoving();
+		object->stop();
 		return true;
 	}
 
@@ -152,7 +152,7 @@ namespace ompgdk
 		IPlayerObjectData* playerData = queryExtension<IPlayerObjectData>(*player);
 		if (playerData)
 		{
-			playerData->editObject(*object);
+			playerData->beginEditing(*object);
 			return true;
 		}
 		return false;
@@ -168,7 +168,7 @@ namespace ompgdk
 	inline bool SetPlayerObjectMaterialText(int playerid, int objectid, const char* text, int materialindex, int materialsize, const char* fontface, int fontsize, bool bold, uint32_t fontcolor, uint32_t backcolor, int textalignment)
 	{
 		GET_PLAYER_OBJECT_CHECKED(object, playerid, objectid, false);
-		object->setMaterialText(materialindex, text, materialsize, fontface, fontsize, bold, Colour::FromARGB(fontcolor), Colour::FromARGB(backcolor), ObjectMaterialTextAlign(textalignment));
+		object->setMaterialText(materialindex, text, ObjectMaterialSize(materialsize), fontface, fontsize, bold, Colour::FromARGB(fontcolor), Colour::FromARGB(backcolor), ObjectMaterialTextAlign(textalignment));
 		return true;
 	}
 

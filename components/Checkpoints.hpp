@@ -8,7 +8,7 @@ namespace ompgdk
 		IPlayerCheckpointData* playerCheckpointData = GetPlayerData<IPlayerCheckpointData>(playerid);
 		if (playerCheckpointData)
 		{
-			IPlayerStandardCheckpointData& cp = playerCheckpointData->getStandardCheckpoint();
+			ICheckpointData& cp = playerCheckpointData->getCheckpoint();
 			cp.setPosition({ x, y, z });
 			cp.setRadius(size); //samp native receives radius not diameter
 			cp.enable();
@@ -22,7 +22,7 @@ namespace ompgdk
 		IPlayerCheckpointData* playerCheckpointData = GetPlayerData<IPlayerCheckpointData>(playerid);
 		if (playerCheckpointData)
 		{
-			IPlayerStandardCheckpointData& cp = playerCheckpointData->getStandardCheckpoint();
+			ICheckpointData& cp = playerCheckpointData->getCheckpoint();
 			cp.disable();
 			return true;
 		}
@@ -34,7 +34,7 @@ namespace ompgdk
 		IPlayerCheckpointData* playerCheckpointData = GetPlayerData<IPlayerCheckpointData>(playerid);
 		if (playerCheckpointData)
 		{
-			IPlayerStandardCheckpointData& cp = playerCheckpointData->getStandardCheckpoint();
+			ICheckpointData& cp = playerCheckpointData->getCheckpoint();
 			if (cp.isEnabled())
 			{
 				return cp.isPlayerInside();
@@ -48,7 +48,7 @@ namespace ompgdk
 		IPlayerCheckpointData* playerCheckpointData = GetPlayerData<IPlayerCheckpointData>(playerid);
 		if (playerCheckpointData)
 		{
-			IPlayerRaceCheckpointData& cp = playerCheckpointData->getRaceCheckpoint();
+			IRaceCheckpointData& cp = playerCheckpointData->getRaceCheckpoint();
 			if (type >= 0 && type <= 8)
 			{
 				cp.setType(RaceCheckpointType(type));
@@ -67,7 +67,7 @@ namespace ompgdk
 		IPlayerCheckpointData* playerCheckpointData = GetPlayerData<IPlayerCheckpointData>(playerid);
 		if (playerCheckpointData)
 		{
-			IPlayerRaceCheckpointData& cp = playerCheckpointData->getRaceCheckpoint();
+			IRaceCheckpointData& cp = playerCheckpointData->getRaceCheckpoint();
 			cp.disable();
 			return true;
 		}
@@ -79,7 +79,7 @@ namespace ompgdk
 		IPlayerCheckpointData* playerCheckpointData = GetPlayerData<IPlayerCheckpointData>(playerid);
 		if (playerCheckpointData) 
 		{
-			IPlayerRaceCheckpointData& cp = playerCheckpointData->getRaceCheckpoint();
+			IRaceCheckpointData& cp = playerCheckpointData->getRaceCheckpoint();
 			if (cp.getType() != RaceCheckpointType::RACE_NONE && cp.isEnabled()) {
 				return cp.isPlayerInside();
 			}
@@ -92,7 +92,7 @@ namespace ompgdk
 		IPlayerCheckpointData* playerData = GetPlayerData<IPlayerCheckpointData>(playerid);
 		if (playerData) 
 		{
-			return playerData->getStandardCheckpoint().isEnabled();
+			return playerData->getCheckpoint().isEnabled();
 		}
 		return false;
 	}
@@ -102,7 +102,7 @@ namespace ompgdk
 		IPlayerCheckpointData* playerData = GetPlayerData<IPlayerCheckpointData>(playerid);
 		if (playerData) 
 		{
-			const IPlayerStandardCheckpointData& data = playerData->getStandardCheckpoint();
+			const ICheckpointData& data = playerData->getCheckpoint();
 			Vector3 pos = data.getPosition();
 			*x = pos.x;
 			*y = pos.y;
@@ -128,7 +128,7 @@ namespace ompgdk
 		IPlayerCheckpointData* playerData = GetPlayerData<IPlayerCheckpointData>(playerid);
 		if (playerData) 
 		{
-			const IPlayerRaceCheckpointData& data = playerData->getRaceCheckpoint();
+			const IRaceCheckpointData& data = playerData->getRaceCheckpoint();
 			Vector3 pos = data.getPosition();
 			*x = pos.x;
 			*y = pos.y;
