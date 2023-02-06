@@ -3,6 +3,7 @@
 #include "./main.hpp"
 
 #include "components/Pickups.hpp"
+#include "components/PlayerPickups.hpp"
 #include "components/Players.hpp"
 #include "components/Objects.hpp"
 #include "components/PlayerObjects.hpp"
