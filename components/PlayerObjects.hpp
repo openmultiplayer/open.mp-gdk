@@ -46,19 +46,25 @@ namespace ompgdk
 
 	inline bool AttachPlayerObjectToPlayer(int playerid, int objectid, int playeridAttachedTo, float offsetX, float offsetY, float offsetZ, float rotX, float rotY, float rotZ)
 	{
-		if (GDKManager::Get()->GetCore())
+		GET_PLAYER_OBJECT_CHECKED(object, playerid, objectid, false);
+		IPlayer* attachedPlayer = GetPlayer(playeridAttachedTo);
+		if (attachedPlayer)
 		{
-			GDKManager::Get()->GetCore()->logLn(LogLevel::Warning, "This native was removed from sa-mp, we do not support it either (yet)");
+			object->attachToPlayer(*attachedPlayer, { offsetX, offsetY, offsetZ }, { rotX, rotY, rotZ });
 		}
-		return false;
+		else
+		{
+			object->resetAttachment();
+		}
+		return true;
 	}
 
-	inline bool AttachPlayerObjectToObject(int playerid, int objectid, int attachedToId, float offsetX, float offsetY, float offsetZ, float rotX, float rotY, float rotZ)
+	inline bool AttachPlayerObjectToObject(int playerid, int objectid, int attachedToId, float offsetX, float offsetY, float offsetZ, float rotX, float rotY, float rotZ, bool syncRotation = true)
 	{
 		GET_PLAYER_OBJECT_CHECKED(object, playerid, objectid, false);
 		GET_PLAYER_OBJECT_CHECKED(attachedTo, playerid, attachedToId, false);
 
-		object->attachToObject(*attachedTo, { offsetX, offsetY, offsetZ }, { rotX, rotY, rotZ });
+		object->attachToObject(*attachedTo, { offsetX, offsetY, offsetZ }, { rotX, rotY, rotZ }, syncRotation);
 		return true;
 	}
 
