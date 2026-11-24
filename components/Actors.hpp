@@ -20,9 +20,10 @@ namespace ompgdk
 	inline bool DestroyActor(int actorid)
 	{
 		IActor* actor = GetEntity<IActor>(actorid);
-		if (actor)
+		IActorsComponent* pool = GDKManager::Get()->GetActors();
+		if (actor && pool)
 		{
-			GDKManager::Get()->GetActors()->release(actor->getID());
+			pool->release(actor->getID());
 			return true;
 		}
 		return false;

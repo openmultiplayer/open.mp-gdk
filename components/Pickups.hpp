@@ -20,9 +20,10 @@ namespace ompgdk
 	inline bool DestroyPickup(int pickupid)
 	{
 		IPickup* pickup = GetEntity<IPickup>(pickupid);
-		if (pickup) 
+		IPickupsComponent* pool = GDKManager::Get()->GetPickups();
+		if (pickup && pool)
 		{
-			GDKManager::Get()->GetPickups()->release(pickup->getID());
+			pool->release(pickup->getID());
 			return true;
 		}
 		return false;

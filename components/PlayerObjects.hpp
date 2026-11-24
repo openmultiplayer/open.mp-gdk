@@ -21,7 +21,7 @@ namespace ompgdk
 	inline bool DestroyPlayerObject(int playerid, int objectid)
 	{
 		IPlayerObjectData* data = GetPlayerData<IPlayerObjectData>(playerid);
-		if (data->get(objectid))
+		if (data && data->get(objectid))
 		{
 			data->release(objectid);
 			return true;

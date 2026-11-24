@@ -37,7 +37,7 @@ namespace ompgdk
     inline bool DeletePlayer3DTextLabel(int playerid, int textlabelid)
     {
         IPlayerTextLabelData* labelData = GetPlayerData<IPlayerTextLabelData>(playerid);
-        if (labelData->get(textlabelid))
+        if (labelData && labelData->get(textlabelid))
         {
             labelData->release(textlabelid);
             return true;
